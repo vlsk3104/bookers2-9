@@ -1,0 +1,52 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-3">
+			<%= render "/users/profile", user:current_user %>
+			<%= render "/books/new_book", book:Book.new %>
+		</div>
+
+		<div class="col-xs-9">
+			<h2><%=@model%> search for "<%=@content %>"</h2>
+			<% if @datas.count == 0 %>
+				<p>検索結果0件です</p>
+			<% end %>
+			<% @datas.each do |data| %>
+			<% if @model == "book" %>
+			<table class="table table-inverse">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Title</th>
+						<th>Opinion</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><%= attachment_image_tag data.user, :profile_image, :fill, 40, 40, class: "img-circle pull-left profile-img", fallback: "no_image.jpg",size:'40x40' %></td>
+						<td><%= data.title %></td>
+						<td><%= data.body %></td>
+					</tr>
+				</tbody>
+			</table>
+			<% elsif @model == "user" %>
+				<table class="table table-inverse">
+				<thead>
+					<tr>
+						<th></th>
+						<th>name</th>
+						<th>introduction</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><%= attachment_image_tag data, :profile_image, :fill, 40, 40, class: "img-circle pull-left profile-img", fallback: "no_image.jpg",size:'40x40' %></td>
+						<td><%= data.name %></td>
+						<td><%= data.introduction %></td>
+					</tr>
+				</tbody>
+			</table>
+			<% end %>
+			<% end %>
+		</div>
+	</div>
+</div>

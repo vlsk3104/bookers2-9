@@ -1,0 +1,12 @@
+<!-- books/index.htmlのパーシャル　book=bookなのでfavoritesコントローラーでインスタンス変数を定義する必要がある -->
+<% if book.favorited_by?(current_user) %>
+	<%= link_to book_favorites_path(book.id),method: :delete,remote: true do %>
+	<span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span>
+	<%= book.favorites.count %>
+	<% end %>
+	<% else %>
+		<%=link_to book_favorites_path(book.id),method: :post,remote: true do %>
+		<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+		<%= book.favorites.count %>
+		<% end %>
+		<% end %>

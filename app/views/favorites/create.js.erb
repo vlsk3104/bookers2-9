@@ -1,0 +1,2 @@
+// id情報と同じ名前の部分に入れる　　　　　　　　　　　　jsで処理され、パーシャルファイルがfavoriteコントローラーを用いて編集される。インスタンス変数はfavoritesコントローラーで定義する
+$('#favorites_buttons_<%= @book.id %>').html("<%= j(render partial: 'favorites/favorite', locals: {book: @book}) %>");

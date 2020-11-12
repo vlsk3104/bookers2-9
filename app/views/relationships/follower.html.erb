@@ -1,0 +1,16 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-3">
+			<%= render "/users/profile", user:current_user %>
+			<%= render "/books/new_book", book:Book.new %>
+		</div>
+
+		<div class="col-xs-9">
+			<h2>follower user</h2>
+				<%= render "/users/index_users", users:@users %>
+				<% if @users.count == 0 %>
+					<p>ユーザはいません</p>
+				<% end %>
+		</div>
+	</div>
+</div>

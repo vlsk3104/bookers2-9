@@ -1,0 +1,46 @@
+
+			<h2>User info</h2>
+			<div class="">
+				<%= attachment_image_tag user, :profile_image, :fill, 60, 60, class: "img-circle  profile-thumb", fallback: "no_image.jpg",size:"60x60" %>
+			</div>
+			<table class="table">
+			<tbody >
+				<tr></tr>
+				<tr>
+					<td>name</td>
+					<td><%= user.name %></td>
+				</tr>
+				<tr>
+					<td>Introduction</td>
+					<td><%= user.introduction %></td>
+				</tr>
+				<tr>
+					<td>follows</td>
+					<td><%=link_to user.follower.count,
+					 user_follow_path(user.id) %></td>
+				</tr>
+				<tr>
+					<td>followers</td>
+					<td><%= link_to user.followed.count, user_follower_path(user.id) %></td>
+				</tr>
+			</tbody>
+			</table>
+			<div class="row">
+			<% unless user == current_user %>
+				<% if current_user.following?(user) %>
+					<%= link_to"フォロー外す",user_relationships_path(user),method: :delete,class: "col-xs-12 btn btn-success" %>
+				<% else %>
+					<%= link_to"フォローする",user_relationships_path(user),method: :POST,class: "col-xs-12 btn btn-primary" %>
+				<% end %>
+			<% end %>
+			<% if user == current_user %>
+				<%= link_to edit_user_path(user) do %>
+				<span class="col-xs-12 btn btn-default glyphicon glyphicon-wrench"></span>
+				<% end %>
+			<% else %>
+				<%= link_to user_path(current_user) do %>
+				<span class="col-xs-12 btn btn-default glyphicon glyphicon-wrench" style="padding-bottom: 10px;"></span><% end %>
+			<% end %>
+			</div>
+
+	
